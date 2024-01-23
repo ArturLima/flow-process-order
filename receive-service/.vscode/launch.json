@@ -11,9 +11,9 @@
             "mode": "debug",
             "program": "${workspaceFolder}/",
             "env": {
-                "DB_URL": "sqlserver://administrator-sql:xxNcVCOuuQxz6py@sqlbekagm.database.windows.net:1433?database=FRAKTYO",
-                "AMQP_SERVER_URL": "amqp://generatorkey-worker:generatorkey-worker@20.91.185.108:5672",
-                "AMQP_QUEUE": "CUSTOMER.KEYGENERATOR.QUEUE",
+                "DB_URL": "",
+                "AMQP_SERVER_URL": "",
+                "AMQP_QUEUE": "",
             }
         }
     ]
