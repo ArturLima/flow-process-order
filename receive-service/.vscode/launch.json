@@ -11,9 +11,9 @@
             "mode": "debug",
             "program": "${workspaceFolder}/",
             "env": {
-                "DB_URL": "",
-                "AMQP_SERVER_URL": "",
-                "AMQP_QUEUE": "",
+                "DB_URL": "postgres://floworder:floworder@localhost:5432/floworder",
+                "AMQP_SERVER_URL": "amqp://guest:guest@localhost:5672/",
+                "AMQP_QUEUE": "RECEIVE.QUEUE",
             }
         }
     ]
