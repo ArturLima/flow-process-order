@@ -27,6 +27,10 @@ func (w *Worker) StartWorker() {
 	if err != nil {
 		log.Fatal("")
 	}
+
+	log.Println("Successfully connected to RabbitMQ")
+	log.Println("Waiting for messages...")
+
 	for {
 		go func() {
 			for message := range messages {

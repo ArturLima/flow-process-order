@@ -1,9 +1,12 @@
 package services
 
-import "receive-service/infra/db"
+import (
+	"receive-service/core/models"
+	"receive-service/infra/db"
+)
 
 type IOrderService interface {
-	InsertOrder(test string) (done bool)
+	InsertOrder(payload *models.Order) (err error)
 }
 
 type OrderService struct {
@@ -16,6 +19,6 @@ func NewOrderService() IOrderService {
 	}
 }
 
-func (o *OrderService) InsertOrder(test string) (done bool) {
-	return o.repository.Insert(test)
+func (o *OrderService) InsertOrder(order *models.Order) (err error) {
+	return o.repository.Insert(order)
 }

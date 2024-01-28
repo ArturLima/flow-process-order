@@ -14,6 +14,7 @@
                 "DB_URL": "postgres://floworder:floworder@localhost:5432/floworder",
                 "AMQP_SERVER_URL": "amqp://floworder:floworder@localhost:5672/",
                 "AMQP_QUEUE": "RECEIVE.QUEUE",
+                "AMQP_QUEUE_STATUS_PUBLISHER": "ORDER.STATUS.QUEUE"
             }
         }
     ]

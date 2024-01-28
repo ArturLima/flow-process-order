@@ -1,13 +1,15 @@
 package db
 
 import (
+	"context"
 	"os"
+	"receive-service/core/models"
 
 	"github.com/uptrace/bun"
 )
 
 type IOrderRepository interface {
-	Insert(test string) (done bool)
+	Insert(payload *models.Order) (err error)
 }
 
 type OrderRepository struct {
@@ -20,6 +22,11 @@ func NewOrderRepository() IOrderRepository {
 	}
 }
 
-func (o *OrderRepository) Insert(teste string) (done bool) {
-	return true
+func (o *OrderRepository) Insert(payload *models.Order) (err error) {
+	_, err = o.context.
+		NewInsert().
+		Model(payload).
+		Exec(context.Background())
+
+	return
 }
