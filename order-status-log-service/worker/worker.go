@@ -2,6 +2,7 @@ package worker
 
 import (
 	"log"
+	"order-status-log-service/core/handlers"
 	"order-status-log-service/infra/rabbitmq"
 )
 
@@ -11,11 +12,13 @@ type IWorker interface {
 
 type Worker struct {
 	consumer rabbitmq.IConsumer
+	handler  handlers.IOrderStatusHandler
 }
 
 func NewWorker() IWorker {
 	return &Worker{
 		consumer: rabbitmq.NewConsumer(),
+		handler:  handlers.NewOrderStatusHandler(),
 	}
 }
 
@@ -33,7 +36,9 @@ func (w *Worker) StartWorker() {
 		go func() {
 			for message := range messages {
 				log.Printf("[INFO] received event: %s\n", message.Body)
-				message.Ack(false)
+				if done := w.handler.Execute(message.Body); done {
+					message.Ack(false)
+				}
 			}
 		}()
 
