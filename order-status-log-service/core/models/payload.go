@@ -9,14 +9,9 @@ type Payload struct {
 	Status   int       `json:"status"`
 }
 
-/*
-func (p *Payload) From() (order *Order) {
-	return &Order{
-		Id:          uuid.New(),
-		Product_id:  p.Product_id,
-		Customer_id: p.Customer_id,
-		Amout:       p.Amout,
-		CreatedAt:   time.Now().UTC().Local(),
+func (p *Payload) From() (order *OrderStatus) {
+	return &OrderStatus{
+		OrderId: p.Order_id,
+		Status:  int64(p.Status),
 	}
 }
-*/

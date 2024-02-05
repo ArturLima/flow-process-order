@@ -5,11 +5,13 @@ import (
 	"order-status-log-service/core/models"
 	"os"
 
+	"github.com/google/uuid"
 	"github.com/uptrace/bun"
 )
 
 type IOrderStatusRepository interface {
 	Insert(os *models.OrderStatus) (err error)
+	Get(orderId uuid.UUID) (orderStatus models.OrderStatus, err error)
 }
 
 type OrderStatusRepository struct {
@@ -28,5 +30,14 @@ func (o *OrderStatusRepository) Insert(os *models.OrderStatus) (err error) {
 		Model(os).
 		Exec(context.Background())
 
+	return
+}
+
+func (o *OrderStatusRepository) Get(order uuid.UUID) (orderStatus models.OrderStatus, err error) {
+	err = o.context.
+		NewSelect().
+		Model(&orderStatus).
+		Where("id = ? ", order).
+		Scan(context.Background())
 	return
 }
