@@ -35,6 +35,10 @@ func (os *OrderStatusHandler) Execute(b []byte) (done bool) {
 		utils.FailWithError("get order", err)
 	}
 
+	if order.Status == 0 {
+		os.service.update(orderStatus)
+	}
+
 	err = os.service.Insert(orderStatus)
 
 	if err != nil {
