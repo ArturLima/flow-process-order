@@ -9,6 +9,7 @@ import (
 
 type IOrderStatusService interface {
 	Insert(os *models.OrderStatus) (err error)
+	Update(os *models.OrderStatus) (err error)
 	Get(orderId uuid.UUID) (orderStatus models.OrderStatus, err error)
 }
 
@@ -24,6 +25,11 @@ func NewOrderStatusService() IOrderStatusService {
 
 func (s *OrderStatusService) Insert(os *models.OrderStatus) (err error) {
 	err = s.repo.Insert(os)
+	return
+}
+
+func (s *OrderStatusService) Update(os *models.OrderStatus) (err error) {
+	err = s.repo.Update(os)
 	return
 }
 

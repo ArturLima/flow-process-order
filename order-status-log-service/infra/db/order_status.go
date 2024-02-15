@@ -11,6 +11,7 @@ import (
 
 type IOrderStatusRepository interface {
 	Insert(os *models.OrderStatus) (err error)
+	Update(os *models.OrderStatus) (err error)
 	Get(orderId uuid.UUID) (orderStatus models.OrderStatus, err error)
 }
 
@@ -30,6 +31,16 @@ func (o *OrderStatusRepository) Insert(os *models.OrderStatus) (err error) {
 		Model(os).
 		Exec(context.Background())
 
+	return
+}
+
+func (o *OrderStatusRepository) Update(os *models.OrderStatus) (err error) {
+	_, err = o.context.
+		NewUpdate().
+		Model(&os).
+		Column("Status").
+		Where("id = ?", os.OrderId).
+		Exec(context.Background())
 	return
 }
 
