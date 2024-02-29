@@ -11,5 +11,6 @@ func NewWorker() IWorker {
 	return &Worker{}
 }
 func (w *Worker) StartWorker() {
+	println("")
 	return
 }
